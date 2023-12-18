@@ -183,17 +183,34 @@ local ConROC_Mage, optionMaxIds = ...;
 		IceArmorRank3 = 10219,
 		IceArmorRank4 = 10220,
 	}
+	ids.Runes = {
+		ArcaneBlast = 400574,
+		ArcaneSurge = 425124,
+		IceLance = 400640,
+		IcyVeins = 425121,
+		LivingBomb = 400613,
+		LivingFlame = 401556,
+		MassRegeneration = 412510,
+		Regeneration = 401417,
+		RewindTime = 401462,
+	}
 -- Auras
 	ids.Player_Buff = {
-
+		TemporalBeacon = 400735,
+		FingersofFrost = 400647,
 	}
 	ids.Player_Debuff = {
+
+	}
+	ids.target_Buff = {
 
 	}
 	ids.Target_Debuff = {
 		Chilled = 6136,
 		FireVulnerability = 22959,
 		WintersChill = 12579,
+		LivingFlame = 401558,
+		ArcaneBlast = 400574,
 	}
 	ids.optionMaxIds = {
 		

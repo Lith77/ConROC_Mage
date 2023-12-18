@@ -113,6 +113,7 @@ local wChillEXP = 0;
 local fVulEXP = 0;
 local fStrikeEXP = 0;
 
+function ConROC:UpdateSpellID()
 --Ranks
 if IsSpellKnown(Arc_Ability.AmplifyMagicRank6) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank6;
 elseif IsSpellKnown(Arc_Ability.AmplifyMagicRank5) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank5;
@@ -372,6 +373,8 @@ IcyVeins = _IcyVeins,
 FrostNova = _FrostNova,
 FrostWard = _FrostWard
 }
+end
+ConROC:UpdateSpellID()
 
 function ConROC:EnableRotationModule()
 	self.Description = "Mage";
@@ -385,19 +388,11 @@ function ConROC:EnableRotationModule()
 end
 function ConROC:PLAYER_TALENT_UPDATE()
 	ConROC:SpecUpdate();
-    if ConROCSpellmenuFrame:IsVisible() then
-        ConROCSpellmenuFrame_CloseButton:Hide();
-        ConROCSpellmenuFrame_Title:Hide();
-        ConROCSpellmenuClass:Hide();
-        ConROCSpellmenuFrame_OpenButton:Show();
-        optionsOpened = false;
-        ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-    else
-        ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-    end
+    ConROC:closeSpellmenu();
 end
 
 function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
+ConROC:UpdateSpellID()
 --Character
 	local plvl	= UnitLevel('player');
 --Racials
@@ -471,8 +466,15 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 	local inMelee = CheckInteractDistance("target", 3);		
 	local targetPh = ConROC:PercentHealth('target');		
 	local hasWand = HasWandEquipped();
-	local incombat = UnitAffectingCombat('player');	
+	local incombat = UnitAffectingCombat('player');
+    local resting = IsResting();
+    local mounted = IsMounted();
+    local onVehicle = UnitHasVehicleUI("player");
+    local moving = ConROC:PlayerSpeed();
 	
+    if onVehicle then
+        return nil
+    end
 --Indicators	
 	ConROC:AbilityBurst(_Evocation, evoRDY and manaPercent <= 25);
 	ConROC:AbilityBurst(_PresenceofMind, pomRDY and incombat);
@@ -482,7 +484,7 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 	ConROC:AbilityRaidBuffs(_ArcaneIntellect, aIntRDY and not (aIntBUFF or aBriBUFF));
 	
 --Warnings
-
+    
 --Pre pull
 	if ConROC:CheckBox(ConROC_SM_Option_PrePull) and ConROC:CheckBox(ConROC_SM_CD_MirrprImage) and mirrRDY then
 		return _MirrorImage
@@ -658,12 +660,18 @@ function ConROC.Mage.Defense(_, timeShift, currentSpell, gcd)
 
 --Conditions
 	local inMelee = CheckInteractDistance("target", 3);	
-	local targetPh = ConROC:PercentHealth('target');	
+	local targetPh = ConROC:PercentHealth('target');
+    local mounted = IsMounted();
+    local onVehicle = UnitHasVehicleUI("player");
+    local moving = ConROC:PlayerSpeed();	
 	
 --Indicators
 
 	
 --Rotations
+    if onVehicle then
+        return nil
+    end
 	if ConROC:CheckBox(ConROC_SM_Armor_Ice) and iArmorRDY and not iArmorBUFF then
 		return _IceArmor;
 	end

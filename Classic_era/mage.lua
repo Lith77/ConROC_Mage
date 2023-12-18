@@ -98,178 +98,201 @@ local _IceArmor = Frost_Ability.FrostArmorRank1;
 local _FrostNova = Frost_Ability.FrostNovaRank1;	
 local _FrostWard = Frost_Ability.FrostWardRank1;
 local _Frostbolt = Frost_Ability.FrostboltRank1;
+--runes
+local _RuneArcaneBlast = ids.Runes.ArcaneBlast;
+local _RuneArcaneSurge = ids.Runes.ArcaneSurge;
+local _RuneIceLance = ids.Runes.IceLance;
+local _RuneIcyVeins = ids.Runes.IcyVeins;
+local _RuneLivingBomb = ids.Runes.LivingBomb;
+local _RuneLivingFlame = ids.Runes.LivingFlame;
+local _RuneMassRegeneration = ids.Runes.MassRegeneration;
+local _RuneRegeneration = ids.Runes.Regeneration;
+local _RuneRewindTime = ids.Runes.RewindTime;
+
+function ConROC:UpdateSpellID()
+	--Ranks
+	if IsSpellKnown(Arc_Ability.AmplifyMagicRank4) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank4;
+	elseif IsSpellKnown(Arc_Ability.AmplifyMagicRank3) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank3;
+	elseif IsSpellKnown(Arc_Ability.AmplifyMagicRank2) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank2; end
+
+	if IsSpellKnown(Arc_Ability.ArcaneExplosionRank6) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank6;
+	elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank5) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank5;
+	elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank4) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank4;
+	elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank3) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank3;
+	elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank2) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank2; end
+
+	if IsSpellKnown(Arc_Ability.ArcaneIntellectRank5) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank5;
+	elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank4) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank4;
+	elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank3) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank3;
+	elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank2) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank2; end
+
+	if IsSpellKnown(Arc_Ability.ArcaneMissilesRank7) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank7;
+	elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank6) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank6;
+	elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank5) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank5;
+	elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank4) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank4;
+	elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank3) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank3;
+	elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank2) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank2; end
+
+	if IsSpellKnown(Arc_Ability.DampenMagicRank5) then _DampenMagic = Arc_Ability.DampenMagicRank5;
+	elseif IsSpellKnown(Arc_Ability.DampenMagicRank4) then _DampenMagic = Arc_Ability.DampenMagicRank4;
+	elseif IsSpellKnown(Arc_Ability.DampenMagicRank3) then _DampenMagic = Arc_Ability.DampenMagicRank3;
+	elseif IsSpellKnown(Arc_Ability.DampenMagicRank2) then _DampenMagic = Arc_Ability.DampenMagicRank2; end	
+
+	if IsSpellKnown(Fire_Ability.BlastWaveRank5) then _BlastWave = Fire_Ability.BlastWaveRank5;
+	elseif IsSpellKnown(Fire_Ability.BlastWaveRank4) then _BlastWave = Fire_Ability.BlastWaveRank4;
+	elseif IsSpellKnown(Fire_Ability.BlastWaveRank3) then _BlastWave = Fire_Ability.BlastWaveRank3;
+	elseif IsSpellKnown(Fire_Ability.BlastWaveRank2) then _BlastWave = Fire_Ability.BlastWaveRank2; end
+
+	if IsSpellKnown(Fire_Ability.FireBlastRank7) then _FireBlast = Fire_Ability.FireBlastRank7;
+	elseif IsSpellKnown(Fire_Ability.FireBlastRank6) then _FireBlast = Fire_Ability.FireBlastRank6;
+	elseif IsSpellKnown(Fire_Ability.FireBlastRank5) then _FireBlast = Fire_Ability.FireBlastRank5;
+	elseif IsSpellKnown(Fire_Ability.FireBlastRank4) then _FireBlast = Fire_Ability.FireBlastRank4;
+	elseif IsSpellKnown(Fire_Ability.FireBlastRank3) then _FireBlast = Fire_Ability.FireBlastRank3;
+	elseif IsSpellKnown(Fire_Ability.FireBlastRank2) then _FireBlast = Fire_Ability.FireBlastRank2; end
+
+	if IsSpellKnown(Fire_Ability.FireWardRank5) then _FireWard = Fire_Ability.FireWardRank5;
+	elseif IsSpellKnown(Fire_Ability.FireWardRank4) then _FireWard = Fire_Ability.FireWardRank4;
+	elseif IsSpellKnown(Fire_Ability.FireWardRank3) then _FireWard = Fire_Ability.FireWardRank3;
+	elseif IsSpellKnown(Fire_Ability.FireWardRank2) then _FireWard = Fire_Ability.FireWardRank2; end
+
+	if IsSpellKnown(Fire_Ability.FireballRank11) then _Fireball = Fire_Ability.FireballRank11;
+	elseif IsSpellKnown(Fire_Ability.FireballRank10) then _Fireball = Fire_Ability.FireballRank10;
+	elseif IsSpellKnown(Fire_Ability.FireballRank9) then _Fireball = Fire_Ability.FireballRank8;
+	elseif IsSpellKnown(Fire_Ability.FireballRank8) then _Fireball = Fire_Ability.FireballRank9;
+	elseif IsSpellKnown(Fire_Ability.FireballRank7) then _Fireball = Fire_Ability.FireballRank7;	
+	elseif IsSpellKnown(Fire_Ability.FireballRank6) then _Fireball = Fire_Ability.FireballRank6;
+	elseif IsSpellKnown(Fire_Ability.FireballRank5) then _Fireball = Fire_Ability.FireballRank5;
+	elseif IsSpellKnown(Fire_Ability.FireballRank4) then _Fireball = Fire_Ability.FireballRank4;
+	elseif IsSpellKnown(Fire_Ability.FireballRank3) then _Fireball = Fire_Ability.FireballRank3;
+	elseif IsSpellKnown(Fire_Ability.FireballRank2) then _Fireball = Fire_Ability.FireballRank2; end
+
+	if IsSpellKnown(Fire_Ability.FlamestrikeRank6) then _Flamestrike = Fire_Ability.FlamestrikeRank6;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank5) then _Flamestrike = Fire_Ability.FlamestrikeRank5;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank4) then _Flamestrike = Fire_Ability.FlamestrikeRank4;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank3) then _Flamestrike = Fire_Ability.FlamestrikeRank3;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank2) then _Flamestrike = Fire_Ability.FlamestrikeRank2; end
+
+	--down ranked Flamestrike
+	if IsSpellKnown(Fire_Ability.FlamestrikeRank6) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank5;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank5) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank4;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank4) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank3;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank3) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank2;
+	elseif IsSpellKnown(Fire_Ability.FlamestrikeRank2) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank1; end
+
+	if IsSpellKnown(Fire_Ability.PyroblastRank8) then _Pyroblast = Fire_Ability.PyroblastRank8;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank7) then _Pyroblast = Fire_Ability.PyroblastRank7;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank6) then _Pyroblast = Fire_Ability.PyroblastRank6;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank5) then _Pyroblast = Fire_Ability.PyroblastRank5;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank4) then _Pyroblast = Fire_Ability.PyroblastRank4;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank3) then _Pyroblast = Fire_Ability.PyroblastRank3;
+	elseif IsSpellKnown(Fire_Ability.PyroblastRank2) then _Pyroblast = Fire_Ability.PyroblastRank2; end
+
+	if IsSpellKnown(Fire_Ability.ScorchRank7) then _Scorch = Fire_Ability.ScorchRank7;
+	elseif IsSpellKnown(Fire_Ability.ScorchRank6) then _Scorch = Fire_Ability.ScorchRank6;
+	elseif IsSpellKnown(Fire_Ability.ScorchRank5) then _Scorch = Fire_Ability.ScorchRank5;
+	elseif IsSpellKnown(Fire_Ability.ScorchRank4) then _Scorch = Fire_Ability.ScorchRank4;
+	elseif IsSpellKnown(Fire_Ability.ScorchRank3) then _Scorch = Fire_Ability.ScorchRank3;
+	elseif IsSpellKnown(Fire_Ability.ScorchRank2) then _Scorch = Fire_Ability.ScorchRank2; end
+
+	if IsSpellKnown(Frost_Ability.BlizzardRank6) then _Blizzard = Frost_Ability.BlizzardRank6;
+	elseif IsSpellKnown(Frost_Ability.BlizzardRank5) then _Blizzard = Frost_Ability.BlizzardRank5;
+	elseif IsSpellKnown(Frost_Ability.BlizzardRank4) then _Blizzard = Frost_Ability.BlizzardRank4;
+	elseif IsSpellKnown(Frost_Ability.BlizzardRank3) then _Blizzard = Frost_Ability.BlizzardRank3;
+	elseif IsSpellKnown(Frost_Ability.BlizzardRank2) then _Blizzard = Frost_Ability.BlizzardRank2; end
+
+	if IsSpellKnown(Frost_Ability.ConeofColdRank5) then _ConeofCold = Frost_Ability.ConeofColdRank5;
+	elseif IsSpellKnown(Frost_Ability.ConeofColdRank4) then _ConeofCold = Frost_Ability.ConeofColdRank4;
+	elseif IsSpellKnown(Frost_Ability.ConeofColdRank3) then _ConeofCold = Frost_Ability.ConeofColdRank3;
+	elseif IsSpellKnown(Frost_Ability.ConeofColdRank2) then _ConeofCold = Frost_Ability.ConeofColdRank2; end
+
+	if IsSpellKnown(Frost_Ability.FrostWardRank5) then _FrostWard = Frost_Ability.FrostWardRank5;
+	elseif IsSpellKnown(Frost_Ability.FrostWardRank4) then _FrostWard = Frost_Ability.FrostWardRank4;
+	elseif IsSpellKnown(Frost_Ability.FrostWardRank3) then _FrostWard = Frost_Ability.FrostWardRank3;
+	elseif IsSpellKnown(Frost_Ability.FrostWardRank2) then _FrostWard = Frost_Ability.FrostWardRank2; end
+
+	if IsSpellKnown(Frost_Ability.FrostboltRank10) then _Frostbolt = Frost_Ability.FrostboltRank10;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank9) then _Frostbolt = Frost_Ability.FrostboltRank9;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank8) then _Frostbolt = Frost_Ability.FrostboltRank8;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank7) then _Frostbolt = Frost_Ability.FrostboltRank7;	
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank6) then _Frostbolt = Frost_Ability.FrostboltRank6;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank5) then _Frostbolt = Frost_Ability.FrostboltRank5;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank4) then _Frostbolt = Frost_Ability.FrostboltRank4;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank3) then _Frostbolt = Frost_Ability.FrostboltRank3;
+	elseif IsSpellKnown(Frost_Ability.FrostboltRank2) then _Frostbolt = Frost_Ability.FrostboltRank2; end
+
+	--Ranks Defensive
+	if IsSpellKnown(Arc_Ability.MageArmorRank3) then _MageArmor = Arc_Ability.MageArmorRank3;
+	elseif IsSpellKnown(Arc_Ability.MageArmorRank2) then _MageArmor = Arc_Ability.MageArmorRank2; end
+
+	if IsSpellKnown(Arc_Ability.ManaShieldRank6) then _ManaShield = Arc_Ability.ManaShieldRank6;
+	elseif IsSpellKnown(Arc_Ability.ManaShieldRank5) then _ManaShield = Arc_Ability.ManaShieldRank5;
+	elseif IsSpellKnown(Arc_Ability.ManaShieldRank4) then _ManaShield = Arc_Ability.ManaShieldRank4;
+	elseif IsSpellKnown(Arc_Ability.ManaShieldRank3) then _ManaShield = Arc_Ability.ManaShieldRank3;
+	elseif IsSpellKnown(Arc_Ability.ManaShieldRank2) then _ManaShield = Arc_Ability.ManaShieldRank2; end
+
+	if IsSpellKnown(Frost_Ability.IceBarrierRank4) then _IceBarrier = Frost_Ability.IceBarrierRank4;
+	elseif IsSpellKnown(Frost_Ability.IceBarrierRank3) then _IceBarrier = Frost_Ability.IceBarrierRank3;
+	elseif IsSpellKnown(Frost_Ability.IceBarrierRank2) then _IceBarrier = Frost_Ability.IceBarrierRank2; end
+
+	if IsSpellKnown(Frost_Ability.IceArmorRank4) then _IceArmor = Frost_Ability.IceArmorRank4;
+	elseif IsSpellKnown(Frost_Ability.IceArmorRank3) then _IceArmor = Frost_Ability.IceArmorRank3;
+	elseif IsSpellKnown(Frost_Ability.IceArmorRank2) then _IceArmor = Frost_Ability.IceArmorRank2;
+	elseif IsSpellKnown(Frost_Ability.IceArmorRank1) then _IceArmor = Frost_Ability.IceArmorRank1;	
+	elseif IsSpellKnown(Frost_Ability.FrostArmorRank3) then _IceArmor = Frost_Ability.FrostArmorRank3;
+	elseif IsSpellKnown(Frost_Ability.FrostArmorRank2) then _IceArmor = Frost_Ability.FrostArmorRank2; end
+
+	if IsSpellKnown(Frost_Ability.FrostNovaRank4) then _FrostNova = Frost_Ability.FrostNovaRank4;
+	elseif IsSpellKnown(Frost_Ability.FrostNovaRank3) then _FrostNova = Frost_Ability.FrostNovaRank3;
+	elseif IsSpellKnown(Frost_Ability.FrostNovaRank2) then _FrostNova = Frost_Ability.FrostNovaRank2; end
+
+	ids.optionMaxIds = {
+		--Arcane
+		Evocation = _Evocation,
+		PresenceofMind = _PresenceofMind,
+		ArcanePower = _ArcanePower,
+		AmplifyMagic = _AmplifyMagic,
+		ArcaneBrilliance = _ArcaneBrilliance,
+		ArcaneExplosion = _ArcaneExplosion,
+		ArcaneIntellect = _ArcaneIntellect,
+		ArcaneMissiles = _ArcaneMissiles,
+		DampenMagic = _DampenMagic,
+		MageArmor = _MageArmor,
+		--Fire
+		BlastWave = _BlastWave,
+		Combustion = _Combustion,
+		FireBlast =_FireBlast,
+		FireWard =_FireWard,
+		Fireball = _Fireball,
+		Flamestrike = _Flamestrike,
+		FlamestrikeDR = _FlamestrikeDR,
+		Pyroblast =_Pyroblast,
+		Scorch =_Scorch,
+		--Frost
+		Blizzard = _Blizzard,
+		ConeofCold = _ConeofCold,
+		Frostbolt = _Frostbolt,
+		IceBarrier = _IceBarrier,
+		IceArmor = _IceArmor,
+		FrostNova = _FrostNova,
+		FrostWard = _FrostWard,
+		--Runes
+		RuneArcaneBlast = _RuneArcaneBlast,
+		RuneArcaneSurge = _RuneArcaneSurge,
+		RuneIceLance = _RuneIceLance,
+		RuneIcyVeins = _RuneIcyVeins,
+		RuneLivingBomb = _RuneLivingBomb,
+		RuneLivingFlame = _RuneLivingFlame,
+		RuneMassRegeneration = _RuneMassRegeneration,
+		RuneRegeneration = _RuneRegeneration,
+		RuneRewindTime = _RuneRewindTime,
+	}
+end
+ConROC:UpdateSpellID()
 
 local wChillEXP = 0;
 local fVulEXP = 0;
 local fStrikeEXP = 0;
 local fStrikeDREXP = 0;
-
---Ranks
-if IsSpellKnown(Arc_Ability.AmplifyMagicRank4) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank4;
-elseif IsSpellKnown(Arc_Ability.AmplifyMagicRank3) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank3;
-elseif IsSpellKnown(Arc_Ability.AmplifyMagicRank2) then _AmplifyMagic = Arc_Ability.AmplifyMagicRank2; end
-
-if IsSpellKnown(Arc_Ability.ArcaneExplosionRank6) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank6;
-elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank5) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank5;
-elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank4) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank4;
-elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank3) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank3;
-elseif IsSpellKnown(Arc_Ability.ArcaneExplosionRank2) then _ArcaneExplosion = Arc_Ability.ArcaneExplosionRank2; end
-
-if IsSpellKnown(Arc_Ability.ArcaneIntellectRank5) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank5;
-elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank4) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank4;
-elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank3) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank3;
-elseif IsSpellKnown(Arc_Ability.ArcaneIntellectRank2) then _ArcaneIntellect = Arc_Ability.ArcaneIntellectRank2; end
-
-if IsSpellKnown(Arc_Ability.ArcaneMissilesRank7) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank7;
-elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank6) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank6;
-elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank5) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank5;
-elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank4) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank4;
-elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank3) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank3;
-elseif IsSpellKnown(Arc_Ability.ArcaneMissilesRank2) then _ArcaneMissiles = Arc_Ability.ArcaneMissilesRank2; end
-
-if IsSpellKnown(Arc_Ability.DampenMagicRank5) then _DampenMagic = Arc_Ability.DampenMagicRank5;
-elseif IsSpellKnown(Arc_Ability.DampenMagicRank4) then _DampenMagic = Arc_Ability.DampenMagicRank4;
-elseif IsSpellKnown(Arc_Ability.DampenMagicRank3) then _DampenMagic = Arc_Ability.DampenMagicRank3;
-elseif IsSpellKnown(Arc_Ability.DampenMagicRank2) then _DampenMagic = Arc_Ability.DampenMagicRank2; end	
-
-if IsSpellKnown(Fire_Ability.BlastWaveRank5) then _BlastWave = Fire_Ability.BlastWaveRank5;
-elseif IsSpellKnown(Fire_Ability.BlastWaveRank4) then _BlastWave = Fire_Ability.BlastWaveRank4;
-elseif IsSpellKnown(Fire_Ability.BlastWaveRank3) then _BlastWave = Fire_Ability.BlastWaveRank3;
-elseif IsSpellKnown(Fire_Ability.BlastWaveRank2) then _BlastWave = Fire_Ability.BlastWaveRank2; end
-
-if IsSpellKnown(Fire_Ability.FireBlastRank7) then _FireBlast = Fire_Ability.FireBlastRank7;
-elseif IsSpellKnown(Fire_Ability.FireBlastRank6) then _FireBlast = Fire_Ability.FireBlastRank6;
-elseif IsSpellKnown(Fire_Ability.FireBlastRank5) then _FireBlast = Fire_Ability.FireBlastRank5;
-elseif IsSpellKnown(Fire_Ability.FireBlastRank4) then _FireBlast = Fire_Ability.FireBlastRank4;
-elseif IsSpellKnown(Fire_Ability.FireBlastRank3) then _FireBlast = Fire_Ability.FireBlastRank3;
-elseif IsSpellKnown(Fire_Ability.FireBlastRank2) then _FireBlast = Fire_Ability.FireBlastRank2; end
-
-if IsSpellKnown(Fire_Ability.FireWardRank5) then _FireWard = Fire_Ability.FireWardRank5;
-elseif IsSpellKnown(Fire_Ability.FireWardRank4) then _FireWard = Fire_Ability.FireWardRank4;
-elseif IsSpellKnown(Fire_Ability.FireWardRank3) then _FireWard = Fire_Ability.FireWardRank3;
-elseif IsSpellKnown(Fire_Ability.FireWardRank2) then _FireWard = Fire_Ability.FireWardRank2; end
-
-if IsSpellKnown(Fire_Ability.FireballRank11) then _Fireball = Fire_Ability.FireballRank11;
-elseif IsSpellKnown(Fire_Ability.FireballRank10) then _Fireball = Fire_Ability.FireballRank10;
-elseif IsSpellKnown(Fire_Ability.FireballRank9) then _Fireball = Fire_Ability.FireballRank8;
-elseif IsSpellKnown(Fire_Ability.FireballRank8) then _Fireball = Fire_Ability.FireballRank9;
-elseif IsSpellKnown(Fire_Ability.FireballRank7) then _Fireball = Fire_Ability.FireballRank7;	
-elseif IsSpellKnown(Fire_Ability.FireballRank6) then _Fireball = Fire_Ability.FireballRank6;
-elseif IsSpellKnown(Fire_Ability.FireballRank5) then _Fireball = Fire_Ability.FireballRank5;
-elseif IsSpellKnown(Fire_Ability.FireballRank4) then _Fireball = Fire_Ability.FireballRank4;
-elseif IsSpellKnown(Fire_Ability.FireballRank3) then _Fireball = Fire_Ability.FireballRank3;
-elseif IsSpellKnown(Fire_Ability.FireballRank2) then _Fireball = Fire_Ability.FireballRank2; end
-
-if IsSpellKnown(Fire_Ability.FlamestrikeRank6) then _Flamestrike = Fire_Ability.FlamestrikeRank6;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank5) then _Flamestrike = Fire_Ability.FlamestrikeRank5;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank4) then _Flamestrike = Fire_Ability.FlamestrikeRank4;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank3) then _Flamestrike = Fire_Ability.FlamestrikeRank3;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank2) then _Flamestrike = Fire_Ability.FlamestrikeRank2; end
-
---down ranked Flamestrike
-if IsSpellKnown(Fire_Ability.FlamestrikeRank6) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank5;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank5) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank4;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank4) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank3;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank3) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank2;
-elseif IsSpellKnown(Fire_Ability.FlamestrikeRank2) then _FlamestrikeDR = Fire_Ability.FlamestrikeRank1; end
-
-if IsSpellKnown(Fire_Ability.PyroblastRank8) then _Pyroblast = Fire_Ability.PyroblastRank8;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank7) then _Pyroblast = Fire_Ability.PyroblastRank7;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank6) then _Pyroblast = Fire_Ability.PyroblastRank6;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank5) then _Pyroblast = Fire_Ability.PyroblastRank5;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank4) then _Pyroblast = Fire_Ability.PyroblastRank4;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank3) then _Pyroblast = Fire_Ability.PyroblastRank3;
-elseif IsSpellKnown(Fire_Ability.PyroblastRank2) then _Pyroblast = Fire_Ability.PyroblastRank2; end
-
-if IsSpellKnown(Fire_Ability.ScorchRank7) then _Scorch = Fire_Ability.ScorchRank7;
-elseif IsSpellKnown(Fire_Ability.ScorchRank6) then _Scorch = Fire_Ability.ScorchRank6;
-elseif IsSpellKnown(Fire_Ability.ScorchRank5) then _Scorch = Fire_Ability.ScorchRank5;
-elseif IsSpellKnown(Fire_Ability.ScorchRank4) then _Scorch = Fire_Ability.ScorchRank4;
-elseif IsSpellKnown(Fire_Ability.ScorchRank3) then _Scorch = Fire_Ability.ScorchRank3;
-elseif IsSpellKnown(Fire_Ability.ScorchRank2) then _Scorch = Fire_Ability.ScorchRank2; end
-
-if IsSpellKnown(Frost_Ability.BlizzardRank6) then _Blizzard = Frost_Ability.BlizzardRank6;
-elseif IsSpellKnown(Frost_Ability.BlizzardRank5) then _Blizzard = Frost_Ability.BlizzardRank5;
-elseif IsSpellKnown(Frost_Ability.BlizzardRank4) then _Blizzard = Frost_Ability.BlizzardRank4;
-elseif IsSpellKnown(Frost_Ability.BlizzardRank3) then _Blizzard = Frost_Ability.BlizzardRank3;
-elseif IsSpellKnown(Frost_Ability.BlizzardRank2) then _Blizzard = Frost_Ability.BlizzardRank2; end
-
-if IsSpellKnown(Frost_Ability.ConeofColdRank5) then _ConeofCold = Frost_Ability.ConeofColdRank5;
-elseif IsSpellKnown(Frost_Ability.ConeofColdRank4) then _ConeofCold = Frost_Ability.ConeofColdRank4;
-elseif IsSpellKnown(Frost_Ability.ConeofColdRank3) then _ConeofCold = Frost_Ability.ConeofColdRank3;
-elseif IsSpellKnown(Frost_Ability.ConeofColdRank2) then _ConeofCold = Frost_Ability.ConeofColdRank2; end
-
-if IsSpellKnown(Frost_Ability.FrostWardRank5) then _FrostWard = Frost_Ability.FrostWardRank5;
-elseif IsSpellKnown(Frost_Ability.FrostWardRank4) then _FrostWard = Frost_Ability.FrostWardRank4;
-elseif IsSpellKnown(Frost_Ability.FrostWardRank3) then _FrostWard = Frost_Ability.FrostWardRank3;
-elseif IsSpellKnown(Frost_Ability.FrostWardRank2) then _FrostWard = Frost_Ability.FrostWardRank2; end
-
-if IsSpellKnown(Frost_Ability.FrostboltRank10) then _Frostbolt = Frost_Ability.FrostboltRank10;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank9) then _Frostbolt = Frost_Ability.FrostboltRank9;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank8) then _Frostbolt = Frost_Ability.FrostboltRank8;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank7) then _Frostbolt = Frost_Ability.FrostboltRank7;	
-elseif IsSpellKnown(Frost_Ability.FrostboltRank6) then _Frostbolt = Frost_Ability.FrostboltRank6;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank5) then _Frostbolt = Frost_Ability.FrostboltRank5;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank4) then _Frostbolt = Frost_Ability.FrostboltRank4;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank3) then _Frostbolt = Frost_Ability.FrostboltRank3;
-elseif IsSpellKnown(Frost_Ability.FrostboltRank2) then _Frostbolt = Frost_Ability.FrostboltRank2; end
-
---Ranks Defensive
-if IsSpellKnown(Arc_Ability.MageArmorRank3) then _MageArmor = Arc_Ability.MageArmorRank3;
-elseif IsSpellKnown(Arc_Ability.MageArmorRank2) then _MageArmor = Arc_Ability.MageArmorRank2; end
-
-if IsSpellKnown(Arc_Ability.ManaShieldRank6) then _ManaShield = Arc_Ability.ManaShieldRank6;
-elseif IsSpellKnown(Arc_Ability.ManaShieldRank5) then _ManaShield = Arc_Ability.ManaShieldRank5;
-elseif IsSpellKnown(Arc_Ability.ManaShieldRank4) then _ManaShield = Arc_Ability.ManaShieldRank4;
-elseif IsSpellKnown(Arc_Ability.ManaShieldRank3) then _ManaShield = Arc_Ability.ManaShieldRank3;
-elseif IsSpellKnown(Arc_Ability.ManaShieldRank2) then _ManaShield = Arc_Ability.ManaShieldRank2; end
-
-if IsSpellKnown(Frost_Ability.IceBarrierRank4) then _IceBarrier = Frost_Ability.IceBarrierRank4;
-elseif IsSpellKnown(Frost_Ability.IceBarrierRank3) then _IceBarrier = Frost_Ability.IceBarrierRank3;
-elseif IsSpellKnown(Frost_Ability.IceBarrierRank2) then _IceBarrier = Frost_Ability.IceBarrierRank2; end
-
-if IsSpellKnown(Frost_Ability.IceArmorRank4) then _IceArmor = Frost_Ability.IceArmorRank4;
-elseif IsSpellKnown(Frost_Ability.IceArmorRank3) then _IceArmor = Frost_Ability.IceArmorRank3;
-elseif IsSpellKnown(Frost_Ability.IceArmorRank2) then _IceArmor = Frost_Ability.IceArmorRank2;
-elseif IsSpellKnown(Frost_Ability.IceArmorRank1) then _IceArmor = Frost_Ability.IceArmorRank1;	
-elseif IsSpellKnown(Frost_Ability.FrostArmorRank3) then _IceArmor = Frost_Ability.FrostArmorRank3;
-elseif IsSpellKnown(Frost_Ability.FrostArmorRank2) then _IceArmor = Frost_Ability.FrostArmorRank2; end
-
-if IsSpellKnown(Frost_Ability.FrostNovaRank4) then _FrostNova = Frost_Ability.FrostNovaRank4;
-elseif IsSpellKnown(Frost_Ability.FrostNovaRank3) then _FrostNova = Frost_Ability.FrostNovaRank3;
-elseif IsSpellKnown(Frost_Ability.FrostNovaRank2) then _FrostNova = Frost_Ability.FrostNovaRank2; end
-
-ids.optionMaxIds = {
---Arcane
-Evocation = _Evocation,
-PresenceofMind = _PresenceofMind,
-ArcanePower = _ArcanePower,
-AmplifyMagic = _AmplifyMagic,
-ArcaneBrilliance = _ArcaneBrilliance,
-ArcaneExplosion = _ArcaneExplosion,
-ArcaneIntellect = _ArcaneIntellect,
-ArcaneMissiles = _ArcaneMissiles,
-DampenMagic = _DampenMagic,
-MageArmor = _MageArmor,
---Fire
-BlastWave = _BlastWave,
-Combustion = _Combustion,
-FireBlast =_FireBlast,
-FireWard =_FireWard,
-Fireball = _Fireball,
-Flamestrike = _Flamestrike,
-FlamestrikeDR = _FlamestrikeDR,
-Pyroblast =_Pyroblast,
-Scorch =_Scorch,
---Frost
-Blizzard = _Blizzard,
-ConeofCold = _ConeofCold,
-Frostbolt = _Frostbolt,
-IceBarrier = _IceBarrier,
-IceArmor = _IceArmor,
-FrostNova = _FrostNova,
-FrostWard = _FrostWard
-}
 
 function ConROC:EnableRotationModule()
 	self.Description = "Mage";
@@ -283,19 +306,12 @@ function ConROC:EnableRotationModule()
 end
 function ConROC:PLAYER_TALENT_UPDATE()
 	ConROC:SpecUpdate();
-    if ConROCSpellmenuFrame:IsVisible() then
-        ConROCSpellmenuFrame_CloseButton:Hide();
-        ConROCSpellmenuFrame_Title:Hide();
-        ConROCSpellmenuClass:Hide();
-        ConROCSpellmenuFrame_OpenButton:Show();
-        optionsOpened = false;
-        ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-    else
-        ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-    end
+    ConROC:closeSpellmenu();
 end
 
 function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
+	ConROC:UpdateSpellID()
+
 --Character
 	local plvl	= UnitLevel('player');
 --Racials
@@ -354,11 +370,34 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 			
 	local _, impArcPoints = ConROC:TalentChosen(Spec.Arcane, Arc_Talent.ImprovedArcaneMissiles)
 	
+--runes
+	local raBlastRDY = ConROC:AbilityReady(_RuneArcaneBlast, timeShift);
+		local raBlastDEBUFF, raBlastCount = ConROC:TargetDebuff(Target_Debuff.ArcaneBlast);
+	local raSurgeRDY = ConROC:AbilityReady(_RuneArcaneSurge, timeShift);
+	local riLanceRDY = ConROC:AbilityReady(_RuneIceLance, timeShift);
+	local riVeinsRDY = ConROC:AbilityReady(_RuneIcyVeins, timeShift);
+	local rlBombRDY = ConROC:AbilityReady(_RuneLivingBomb, timeShift);
+		local rlBombDEBUFF = ConROC:TargetDebuff(_RuneLivingBomb, timeShift);
+	local rlFlameRDY = ConROC:AbilityReady(_RuneLivingFlame, timeShift);
+		local rlFlameDEBUFF = ConROC:TargetDebuff(Target_Debuff.LivingFlame, timeShift);
+	local rmRegenRDY = ConROC:AbilityReady(_RuneMassRegeneration, timeShift);
+	local rRegenRDY = ConROC:AbilityReady(_RuneRegeneration, timeShift);
+	local rrTimeRDY = ConROC:AbilityReady(_RuneRewindTime, timeShift);
+	local rFoFBUFF, rFoFDUR = ConROC:BuffName(Player_Buff.FingersofFrost, timeShift);
+
 --Conditions
 	local inMelee = CheckInteractDistance("target", 3);		
 	local targetPh = ConROC:PercentHealth('target');		
 	local hasWand = HasWandEquipped();
-	local incombat = UnitAffectingCombat('player');	
+   	local moving = ConROC:PlayerSpeed();	
+   	local incombat = UnitAffectingCombat('player');
+    local resting = IsResting();
+    local mounted = IsMounted();
+    local onVehicle = UnitHasVehicleUI("player");
+	
+    if onVehicle then
+        return nil
+    end
 	
 --Indicators	
 	ConROC:AbilityBurst(_Evocation, evoRDY and manaPercent <= 25);
@@ -369,70 +408,141 @@ function ConROC.Mage.Damage(_, timeShift, currentSpell, gcd)
 	ConROC:AbilityRaidBuffs(_ArcaneIntellect, aIntRDY and not (aIntBUFF or aBriBUFF));
 	
 --Warnings
-
+	--[[
+	if not incombat and not ConROC:TarHostile() and ConROC:CheckBox(ConROC_SM_Option_HideRotation) then
+		ConROCWindow:Hide();
+	else
+		ConROCWindow:Show();
+	end
+	--]]
 --Rotations
+	--print("IsSpellKnown(_RuneIceLance)",IsSpellKnown(_RuneIceLance))
+	--print("IsSpellKnownOrOverridesKnown(_RuneIceLance)",IsSpellKnownOrOverridesKnown(_RuneIceLance))
+	--print("ConROC.Seasons.IsSoD",ConROC.Seasons.IsSoD)
 	if ConROC:CheckBox(ConROC_SM_CD_Evocation) and evoRDY and manaPercent < 25 then
 		return _Evocation;
 	end
-	
-    if pBlastRDY and (not incombat or pomBUFF) then
-        return _Pyroblast;
-    end
-    
-    if wChillCount >= 1 and wChillDUR <= 4 then
-        return _Frostbolt;
-    end
-    
-    if fVulCount >= 1 and fVulDUR <= 4 then
-        return _Scorch;
-    end 
-    
-    if cofcRDY and frNovaDEBUFF and inMelee then
-        return _ConeofCold;
-    end
-    
-    if fBlastRDY and (targetPh <= 25 or inMelee) and not ConROC_AoEButton:IsVisible() then
-        return _FireBlast;
+
+	if ConROC.Seasons.IsSoD then --DPS rotation for SoD
+	    if ConROC:CheckBox(ConROC_SM_Rune_IcyVeins) and riVeinsRDY then --and fBallRDY then
+	    	return _RuneIcyVeins;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_LivingBomb) and rlBombRDY and not rlBombDEBUFF and ((targetPh >= 5 and ConROC:Raidmob()) or (targetPh >= 20 and not ConROC:Raidmob())) then
+	    	return _RuneLivingBomb;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_LivingFlame) and rlFlameRDY and ConROC_AoEButton:IsVisible() then --and fBallRDY then
+	    	return _RuneLivingFlame;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_ArcaneBlast) and raBlastRDY and raBlastCount < 4 then --and fBallRDY then
+	    	return _RuneArcaneBlast;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_ArcaneSurge) and raSurgeRDY then --and fBallRDY then
+	    	return _RuneArcaneSurge;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_IceLance) and riLanceRDY and (moving or rFoFBUFF) then --and fBallRDY then
+	    	return _RuneIceLance;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_MassRegeneration) and rmRegenRDY then --and fBallRDY then
+	    	return _RuneMassRegeneration;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_Regeneration) and rRegenRDY then --and fBallRDY then
+	    	return _RuneRegeneration;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Rune_RewindTime) and rrTimeRDY then --and fBallRDY then
+	    	return _RuneRewindTime;
+	    end
+	    if ConROC_AoEButton:IsVisible() then
+	    	if ConROC:CheckBox(ConROC_SM_AoE_ArcaneExplosion) and aExpRDY and inMelee then
+		        return _ArcaneExplosion;
+		    end
+
+		    if ConROC:CheckBox(ConROC_SM_AoE_Flamestrike) and fStrikeRDY and not inMelee and fStrikeDUR <= 2 then
+		        return _Flamestrike;
+		    end 
+		    
+		    if ConROC:CheckBox(ConROC_SM_AoE_Blizzard) and blizRDY and not inMelee then
+		        return _Blizzard;
+		    end
+		end
+       	if fBlastRDY and (targetPh <= 25 or inMelee) and not ConROC_AoEButton:IsVisible() then
+	        return _FireBlast;
+	    end
+	    if ConROC:CheckBox(ConROC_SM_Filler_Fireball) and fBallRDY then
+	        return _Fireball;
+	    end
+    	if ConROC:CheckBox(ConROC_SM_Filler_ArcaneMissiles) and aMissRDY then
+	        return _ArcaneMissiles;
+	    end
+        if ConROC:CheckBox(ConROC_SM_Filler_Frostbolt) and frBoltRDY then
+	        return _Frostbolt;
+	    end 
+
+	else --DPS rotation for Classic Era & Classic HC
+
+
+		if ConROC:CheckBox(ConROC_SM_CD_Evocation) and evoRDY and manaPercent < 25 then
+			return _Evocation;
+		end
+		
+	    if pBlastRDY and (not incombat or pomBUFF) then
+	        return _Pyroblast;
+	    end
+	    
+	    if wChillCount >= 1 and wChillDUR <= 4 then
+	        return _Frostbolt;
+	    end
+	    
+	    if fVulCount >= 1 and fVulDUR <= 4 then
+	        return _Scorch;
+	    end 
+	    
+	    if cofcRDY and frNovaDEBUFF and inMelee then
+	        return _ConeofCold;
+	    end
+	    
+	    if fBlastRDY and (targetPh <= 25 or inMelee) and not ConROC_AoEButton:IsVisible() then
+	        return _FireBlast;
+	    end
+
+	    if ConROC:CheckBox(ConROC_SM_Option_UseWand) and hasWand and ((manaPercent <= 20 and not evoRDY) or targetPh <= 5) then
+	        return Caster.Shoot;
+	    end
+	    
+	    if ConROC_AoEButton:IsVisible() and bWaveRDY and inMelee then 
+	        return _BlastWave;
+	    end
+	    
+	    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_ArcaneExplosion) and aExpRDY and inMelee then
+	        return _ArcaneExplosion;
+	    end
+
+	    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_Flamestrike) and fStrikeRDY and not inMelee and fStrikeDUR <= 2 then
+	        return _Flamestrike;
+	    end 
+	    
+	    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_Blizzard) and blizRDY and not inMelee then
+	        return _Blizzard;
+	    end 
+	    if ConROC:CheckBox(ConROC_SM_CD_Combustion) and combRDY and incombat and ConROC:TalentChosen(Spec.Fire, Fire_Talent.Combustion) and fVulCount == 5 then
+	        return _Combustion
+	    end
+	    if scorRDY and ConROC:TalentChosen(Spec.Fire, Fire_Talent.ImprovedScorch) and fVulCount < 5 then
+	        return _Scorch;
+	    end
+	    
+	    if ConROC:CheckBox(ConROC_SM_Filler_Fireball) and fBallRDY then
+	        return _Fireball;
+	    end
+	    
+	    if ConROC:CheckBox(ConROC_SM_Filler_ArcaneMissiles) and aMissRDY then
+	        return _ArcaneMissiles;
+	    end
+	    
+	    if ConROC:CheckBox(ConROC_SM_Filler_Frostbolt) and frBoltRDY then
+	        return _Frostbolt;
+	    end 
     end
 
-    if ConROC:CheckBox(ConROC_SM_Option_UseWand) and hasWand and ((manaPercent <= 20 and not evoRDY) or targetPh <= 5) then
-        return Caster.Shoot;
-    end
-    
-    if ConROC_AoEButton:IsVisible() and bWaveRDY and inMelee then 
-        return _BlastWave;
-    end
-    
-    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_ArcaneExplosion) and aExpRDY and inMelee then
-        return _ArcaneExplosion;
-    end
-
-    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_Flamestrike) and fStrikeRDY and not inMelee and fStrikeDUR <= 2 then
-        return _Flamestrike;
-    end 
-    
-    if ConROC_AoEButton:IsVisible() and ConROC:CheckBox(ConROC_SM_AoE_Blizzard) and blizRDY and not inMelee then
-        return _Blizzard;
-    end 
-    if ConROC:CheckBox(ConROC_SM_CD_Combustion) and combRDY and incombat and ConROC:TalentChosen(Spec.Fire, Fire_Talent.Combustion) and fVulCount == 5 then
-        return _Combustion
-    end
-    if scorRDY and ConROC:TalentChosen(Spec.Fire, Fire_Talent.ImprovedScorch) and fVulCount < 5 then
-        return _Scorch;
-    end
-    
-    if ConROC:CheckBox(ConROC_SM_Filler_Fireball) and fBallRDY then
-        return _Fireball;
-    end
-    
-    if ConROC:CheckBox(ConROC_SM_Filler_ArcaneMissiles) and aMissRDY then
-        return _ArcaneMissiles;
-    end
-    
-    if ConROC:CheckBox(ConROC_SM_Filler_Frostbolt) and frBoltRDY then
-        return _Frostbolt;
-    end 
-    
     return nil; 		
 end
 
@@ -460,7 +570,12 @@ function ConROC.Mage.Defense(_, timeShift, currentSpell, gcd)
 
 --Conditions
 	local inMelee = CheckInteractDistance("target", 3);	
-	local targetPh = ConROC:PercentHealth('target');	
+	local targetPh = ConROC:PercentHealth('target');
+    local onVehicle = UnitHasVehicleUI("player");
+	
+    if onVehicle then
+        return nil
+    end
 	
 --Indicators
 

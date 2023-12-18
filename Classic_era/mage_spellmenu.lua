@@ -118,6 +118,20 @@ function ConROC:SpellmenuClass()
 	}
 	ConROC_RotationSettingsTable = {
 		{
+	    frameName = "Runes",
+	    spells = {
+	      {spellID = ids.optionMaxIds.RuneArcaneBlast, spellCheckbox = "Rune_ArcaneBlast", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneArcaneSurge, spellCheckbox = "Rune_ArcaneSurge", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneIceLance, spellCheckbox = "Rune_IceLance", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneIcyVeins, spellCheckbox = "Rune_IcyVeins", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneLivingBomb, spellCheckbox = "Rune_LivingBomb", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneLivingFlame, spellCheckbox = "Rune_LivingFlame", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneMassRegeneration, spellCheckbox = "Rune_MassRegeneration", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneRegeneration, spellCheckbox = "Rune_Regeneration", reqLevel = 1, type="rune"},
+	      {spellID = ids.optionMaxIds.RuneRewindTime, spellCheckbox = "Rune_RewindTime", reqLevel = 1, type="rune"},
+	    },
+	    groupType = "checkBoxes"
+	  },{
 	    frameName = "Armors",
 	    spells = {
 	      {spellID = ids.optionMaxIds.IceArmor, spellCheckbox = "Armor_Ice", reqLevel = 1, type="spell"},
@@ -155,8 +169,9 @@ function ConROC:SpellmenuClass()
 	  {
 	    frameName = "Options",
 	    spells = {
+	    	--{spellID = "Hide rotation window out of combat", spellCheckbox = "Option_HideRotation", reqLevel = 1, type="custom", customName="Hide Out of Combat"},
 	    	{spellID = "AoE Toggle Button", spellCheckbox = "Option_AoE", reqLevel = 14, type="aoetoggler"},
-	    	{spellID = "Use Wand", spellCheckbox = "Option_UseWand", reqLevel = 5, type="wand"}
+	    	{spellID = "Use Wand", spellCheckbox = "Option_UseWand", reqLevel = 5, type="wand"},
 	    }
 	  }
 	}
@@ -387,7 +402,7 @@ function ConROC_OptionsWindow(_table, _roles)
         local _spells = _table[i].spells
         for j = 1, #_spells do
             local _spellData = _spells[j]
-            if _spellData.type == "spell" or _spellData.type == "poison" then
+            if _spellData.type == "spell" or _spellData.type == "poison" or type == "spell" or _spellData.type == "rune" then
                 if _table[i].groupType == "radioButtons" then
                     ConROC:OptionRadioButtonSpell(_spellData, i, j, _spellFrame, radioButtonsTable);
                 else
@@ -541,6 +556,11 @@ function ConROC:OptionWand(_spellData, i, j, _spellFrame)
 	oItem:SetScript("OnClick", 
 		function(self)
 			ConROC:setRoleSpellClicked(_spellData, self)
+			if self:GetChecked() then
+				if (not HasWandEquipped()) then
+					flashMessage()
+				end
+			end
 		end);
 	oItemtext:SetText(_spellData.spellID);
 	local texture = 0;
@@ -763,7 +783,7 @@ function ConROC:OptionNone(_spellData, i, j, _spellFrame, _checkType, _radioButt
     lastFrame:Show();
 end
 
-function ConROC:SpellMenuUpdate()
+function ConROC:SpellMenuUpdate(newSpell)
 	lastFrame = ConROCScrollChild;
 	local anyHLVisible = false;
 	scrollHeight = 0;
@@ -789,7 +809,7 @@ function ConROC:SpellMenuUpdate()
 	    	local firstItem = 1;
 		    for j = 1, #_spells do
 		    	local _spellData = _spells[j]
-				if _spellData.type == "spell" then
+				if _spellData.type == "spell" or _spellData.type == "rune" then
 					local spellName, _, spellTexture = GetSpellInfo(_spellData.spellID)
 					local oItem = _G["ConROC_SM_".._spellData.spellCheckbox]
 					if j == firstItem then
@@ -798,7 +818,7 @@ function ConROC:SpellMenuUpdate()
 						oItem:SetPoint("TOPLEFT", lFrame, "BOTTOMLEFT", 0, 0);
 					end
 					if type(_spellData.spellID) == "number" then
-						if plvl >= _spellData.reqLevel and IsSpellKnown(_spellData.spellID) then
+						if plvl >= _spellData.reqLevel and (IsSpellKnown(_spellData.spellID) or IsSpellKnownOrOverridesKnown(_spellData.spellID)) then
 							lFrame = oItem;
 							lFrame:Show();
 							if oItem:IsShown() then
@@ -818,8 +838,8 @@ function ConROC:SpellMenuUpdate()
 							--print("Hide spell", spellName)
 						end
 					else
-						scrollHeight = scrollHeight + math.ceil(lFrame:GetHeight());
-						spellFrameHeight = spellFrameHeight + math.ceil(oItem:GetHeight());
+						--scrollHeight = scrollHeight + math.ceil(lFrame:GetHeight());
+						--spellFrameHeight = spellFrameHeight + math.ceil(oItem:GetHeight());
 					end
 				--spell end
 				elseif _spellData.type == "wand" then
@@ -840,9 +860,9 @@ function ConROC:SpellMenuUpdate()
 						    end
 						local role, checkboxName, frameName = ConROC:checkActiveRole()
 	            		local spellName = "ConROC_" .. frameName .. "_" .. _spellData.spellCheckbox
-						if (not HasWandEquipped()) and (ConROC:CheckBox(role) and ConROCMageSpells[spellName]) then 
-							flashMessage()
-						end
+						--if (not HasWandEquipped()) and (ConROC:CheckBox(role) and ConROCMageSpells[spellName]) then 
+						--	flashMessage()
+						--end
 					else
 						if j == firstItem then
 							if j == #_spells then
@@ -988,14 +1008,18 @@ function ConROC:SpellMenuUpdate()
 		ConROCScrollContainer:Show();
 		ConROCScrollChild:Show();
 	end
+
+	if newSpell then
+		ConROC:closeSpellmenu();
+	end
 end
 function flashMessage()
-	if HasWandEquipped() then
+	if HasWandEquipped() or not ConROC:CheckBox(ConROC_SM_Option_UseWand) then
 		return
 	end
 	ConROC:DisplayErrorMessage("You should equip a wand!", 3.0, 0.5, 0.5, 1.0)
 	if not HasWandEquipped() then
-		C_Timer.After(4, function()
+		C_Timer.After(5, function()
 			flashMessage()
 		end);
 	end
