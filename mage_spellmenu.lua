@@ -28,7 +28,7 @@ local defaults = {
 	["ConROC_Caster_AoE_ArcaneExplosion"] = true,
 	["ConROC_Caster_AoE_Flamestrike"] = true,
 	["ConROC_Caster_AoE_Blizzard"] = true,
-	["ConROC_Caster_Option_UseWand"] = true,
+	["ConROC_Caster_Option_UseWand"] = false,
 	["ConROC_Caster_Option_AoE"] = true,
 }
 
@@ -838,8 +838,6 @@ function ConROC:SpellMenuUpdate(newSpell)
 							--print("Hide spell", spellName)
 						end
 					else
-						--scrollHeight = scrollHeight + math.ceil(lFrame:GetHeight());
-						--spellFrameHeight = spellFrameHeight + math.ceil(oItem:GetHeight());
 					end
 				--spell end
 				elseif _spellData.type == "wand" then
@@ -860,9 +858,6 @@ function ConROC:SpellMenuUpdate(newSpell)
 						    end
 						local role, checkboxName, frameName = ConROC:checkActiveRole()
 	            		local spellName = "ConROC_" .. frameName .. "_" .. _spellData.spellCheckbox
-						--if (not HasWandEquipped()) and (ConROC:CheckBox(role) and ConROCMageSpells[spellName]) then 
-						--	flashMessage()
-						--end
 					else
 						if j == firstItem then
 							if j == #_spells then

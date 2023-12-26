@@ -6,6 +6,6 @@
 ## Dependencies: ConROC
 ## LoadOnDemand: 1
 
-Classic_era\mage_ids.lua
-Classic_era\mage_spellmenu.lua
-Classic_era\mage.lua
+mage_ids.lua
+mage_spellmenu.lua
+mage.lua
